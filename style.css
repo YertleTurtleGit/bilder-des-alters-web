@@ -55,6 +55,8 @@ body {
    left: 0%;
    transform-style: preserve-3d;
    transform: rotateX(90deg) translateZ(-100px);
+
+   z-index: 0;
 }
 
 .cube__face {

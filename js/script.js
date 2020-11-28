@@ -57,4 +57,7 @@ for (var i = 0; i < MENU_ITEMS.length; i++) {
     CONTENT_PARTS[i].id = "content-part-" + i;
     MENU_ITEMS[i].addEventListener("click", changeIndex.bind(null, i));
 }
+changeIndex(0);
+let drawingBuffer = MENU_ITEMS[currentMenuItemIndex];
+drawingBuffer.style.backgroundColor = "white";
 console.log("script loaded.");

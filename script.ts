@@ -65,4 +65,8 @@ for (var i = 0; i < MENU_ITEMS.length; i++) {
    MENU_ITEMS[i].addEventListener("click", changeIndex.bind(null, i));
 }
 
+changeIndex(0);
+let drawingBuffer = MENU_ITEMS[currentMenuItemIndex] as HTMLElement;
+drawingBuffer.style.backgroundColor = "white";
+
 console.log("script loaded.");

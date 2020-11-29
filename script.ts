@@ -18,11 +18,11 @@ function wheeling(event): void {
       CUBE.style.transform = "translateZ(-100px)";
       changeIndex(0);
    } else {
-      if (event.deltaY < 0) {
+      /*if (event.deltaY < 0) {
          previousIndex();
       } else {
          nextIndex();
-      }
+      }*/
    }
 }
 
@@ -140,7 +140,7 @@ window.addEventListener("wheel", wheeling);
 for (var i = 0; i < MENU_ITEMS.length; i++) {
    MENU_ITEMS[i].id = "menu-item-" + i;
    CONTENT_PARTS[i].id = "content-part-" + i;
-   MENU_ITEMS[i].addEventListener("click", changeIndex.bind(null, i));
+   //MENU_ITEMS[i].addEventListener("click", changeIndex.bind(null, i));
 }
 
 changeIndex(0);

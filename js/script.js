@@ -14,12 +14,11 @@ function wheeling(event) {
         changeIndex(0);
     }
     else {
-        if (event.deltaY < 0) {
-            previousIndex();
-        }
-        else {
-            nextIndex();
-        }
+        /*if (event.deltaY < 0) {
+           previousIndex();
+        } else {
+           nextIndex();
+        }*/
     }
 }
 function previousIndex() {
@@ -109,7 +108,7 @@ window.addEventListener("wheel", wheeling);
 for (var i = 0; i < MENU_ITEMS.length; i++) {
     MENU_ITEMS[i].id = "menu-item-" + i;
     CONTENT_PARTS[i].id = "content-part-" + i;
-    MENU_ITEMS[i].addEventListener("click", changeIndex.bind(null, i));
+    //MENU_ITEMS[i].addEventListener("click", changeIndex.bind(null, i));
 }
 changeIndex(0);
 let drawingBuffer = MENU_ITEMS[currentMenuItemIndex];

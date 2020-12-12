@@ -27,24 +27,21 @@ body {
    min-height: 100%;
    padding: 0;
    margin: 0;
-   overflow-x: hidden;
+}
+
+.scene-float {
 }
 
 .scene {
-   position: relative;
    width: var(--cube-size);
-   height: auto;
-   min-height: var(--cube-size);
-   top: 0%;
-   left: 50%;
-   transform: translate(-50%, 0%);
+   height: var(--cube-size);
    perspective: 600px;
 }
 
-#cube {
+.cube {
    position: relative;
-   width: 100%;
-   height: auto;
+   width: var(--cube-size);
+   height: max-content;
    transform-style: preserve-3d;
    transform: rotateX(90deg) translateZ(-100px);
    z-index: 0;
@@ -52,7 +49,7 @@ body {
 
 .cube__face {
    position: absolute;
-   width: var(--cube-size) !important;
+   width: var(--cube-size);
    height: var(--cube-size);
    font-size: 1.75rem;
    color: black;
@@ -61,53 +58,54 @@ body {
    margin: 0%;
 }
 
-#cube__face--right {
+.cube__face--right {
    height: auto;
    min-height: var(--cube-size);
    transform: rotateY(90deg) translateZ(var(--cube-size-half));
 }
-#cube__face--back {
+.cube__face--back {
    height: auto;
    min-height: var(--cube-size);
    transform: rotateY(180deg) translateZ(var(--cube-size-half));
 }
-#cube__face--back > * {
+.cube__face--back > * {
    text-align: left;
    transform: rotateY(180deg);
    padding: 5%;
    text-align: justify;
+   background-color: white;
 }
-#cube__face--right > * {
+.cube__face--right > * {
    text-align: left;
    transform: rotateY(180deg);
    padding: 5%;
    text-align: justify;
 }
 
-#cube__face--left {
+.cube__face--left {
    transform: rotateY(-90deg) translateZ(var(--cube-size-half));
 }
-#cube__face--left > * {
+.cube__face--left > * {
    transform: rotateY(180deg);
    padding: 5%;
    padding-right: 10%;
    font-size: 3rem;
    text-transform: uppercase;
 }
-#cube__face--left ul {
+.cube__face--left ul {
    list-style: none;
    text-align: right;
    cursor: pointer;
 }
-#cube__face--left ul li:hover {
+.cube__face--left ul li:hover {
    background-color: lightgray;
 }
 
-#cube__face--top {
+.cube__face--top {
    transform: rotateX(90deg) translateZ(var(--cube-size-half));
 }
-#cube__face--top > * {
-   position: absolute;
+.cube__face--top > * {
+   position: sticky;
    width: 100%;
    height: auto;
    top: 20%;
@@ -119,16 +117,16 @@ body {
    font-size: 5.5rem;
 }
 
-#cube__face--top ul li {
+.cube__face--top ul li {
    text-align: justify;
    text-align-last: justify;
 }
 
-#cube__face--bottom {
+.cube__face--bottom {
    transform: rotateX(-90deg) translateZ(var(--cube-size-half));
 }
 
-#cube__face--bottom > * {
+.cube__face--bottom > * {
    width: 100%;
    height: auto;
    transform: rotateX(180deg);
@@ -137,7 +135,7 @@ body {
    font-size: 1.75rem;
 }
 
-#cube__face--bottom img {
+.cube__face--bottom img {
    position: absolute;
    top: 50%;
    left: 50%;
@@ -145,7 +143,7 @@ body {
    max-height: 50%;
 }
 
-#cube__face--bottom p {
+.cube__face--bottom p {
    position: absolute;
    top: 50%;
    left: 0%;
@@ -155,7 +153,7 @@ body {
 
 @media (orientation: landscape) {
    @media (max-height: 910px) {
-      #cube__face--top > * {
+      .cube__face--top > * {
          font-size: 4.5rem;
       }
    }
@@ -164,58 +162,58 @@ body {
       .scene {
          perspective: 400px;
       }
-      #cube__face--top > * {
+      .cube__face--top > * {
          font-size: 4rem;
       }
    }
 
    @media (max-height: 700px) {
-      #cube__face--top > * {
+      .cube__face--top > * {
          font-size: 3.5rem;
       }
-      #cube__face--bottom > * {
+      .cube__face--bottom > * {
          font-size: 1.5rem;
       }
    }
 
    @media (max-height: 600px) {
-      #cube__face--top > * {
+      .cube__face--top > * {
          font-size: 3rem;
       }
-      #cube__face--bottom > * {
+      .cube__face--bottom > * {
          font-size: 1.4rem;
       }
    }
 
    @media (max-height: 540px) {
-      #cube__face--left > * {
+      .cube__face--left > * {
          font-size: 2.75rem;
       }
-      #cube__face--bottom > * {
+      .cube__face--bottom > * {
          font-size: 1.3rem;
       }
    }
 
    @media (max-height: 500px) {
-      #cube__face--top > * {
+      .cube__face--top > * {
          font-size: 2.7rem;
       }
-      #cube__face--left > * {
+      .cube__face--left > * {
          font-size: 2.5rem;
       }
-      #cube__face--bottom > * {
+      .cube__face--bottom > * {
          font-size: 1.2rem;
       }
    }
 
    @media (max-height: 450px) {
-      #cube__face--top > * {
+      .cube__face--top > * {
          font-size: 2.4rem;
       }
-      #cube__face--left > * {
+      .cube__face--left > * {
          font-size: 2rem;
       }
-      #cube__face--bottom > * {
+      .cube__face--bottom > * {
          font-size: 1rem;
       }
    }
@@ -226,25 +224,25 @@ body {
       .scene {
          perspective: 400px;
       }
-      #cube__face--top > * {
+      .cube__face--top > * {
          font-size: 4.5rem;
       }
-      #cube__face--left > * {
+      .cube__face--left > * {
          font-size: 2.5rem;
       }
-      #cube__face--bottom > * {
+      .cube__face--bottom > * {
          font-size: 1.6rem;
       }
    }
 
    @media (max-width: 750px) {
-      #cube__face--top > * {
+      .cube__face--top > * {
          font-size: 3.5rem;
       }
-      #cube__face--left > * {
+      .cube__face--left > * {
          font-size: 2.1rem;
       }
-      #cube__face--bottom > * {
+      .cube__face--bottom > * {
          font-size: 1.3rem;
       }
    }
@@ -253,13 +251,13 @@ body {
       .scene {
          perspective: 300px;
       }
-      #cube__face--top > * {
+      .cube__face--top > * {
          font-size: 2.4rem;
       }
-      #cube__face--left > * {
+      .cube__face--left > * {
          font-size: 1.7rem;
       }
-      #cube__face--bottom > * {
+      .cube__face--bottom > * {
          font-size: 1.1rem;
       }
    }
@@ -271,19 +269,19 @@ body {
       .cube__face {
          font-size: 0.75rem;
       }
-      #cube__face--top > * {
+      .cube__face--top > * {
          font-size: 2.1rem;
       }
-      #cube__face--left > * {
+      .cube__face--left > * {
          font-size: 1.6rem;
       }
-      #cube__face--back > * {
+      .cube__face--back > * {
          font-size: 1.5rem;
       }
-      #cube__face--right > * {
+      .cube__face--right > * {
          font-size: 1.5rem;
       }
-      #cube__face--bottom > * {
+      .cube__face--bottom > * {
          font-size: 1rem;
       }
    }

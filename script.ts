@@ -1,6 +1,6 @@
 "use strict";
 
-const CUBE = document.getElementById("cube");
+const CUBES = document.getElementsByClassName("cube");
 const CUBE_RIGHT = document.getElementById("cube__face--right");
 const CUBE_LEFT = document.getElementById("cube__face--left");
 
@@ -17,17 +17,20 @@ function wheeling(event): void {
       setTimeout(function () {
          introRotated = true;
       }, 1000);
-      CUBE.style.transform = "rotateX(0deg)";
-      CUBE.style.transform = "translateZ(-100px)";
+      for (var i = 0; i < CUBES.length; i++) {
+         let drawingBuffer = CUBES[i] as HTMLElement;
+         drawingBuffer.style.transform = "rotateX(0deg)";
+         drawingBuffer.style.transform = "translateZ(-100px)";
+      }
    } else {
    }
 }
 
 window.addEventListener("wheel", wheeling);
-for (var i = 0; i < MENU_ITEMS.length; i++) {
-   MENU_ITEMS[i].id = "menu-item-" + i;
-   CONTENT_PARTS[i].id = "content-part-" + i;
-   CUBE_RIGHT.appendChild(CONTENT_PARTS[i]);
+for (var i = 0; i < CONTENT_PARTS.length; i++) {
+   CUBE_RIGHT.appendChild(
+      document.getElementById("content-part-" + String(i)).cloneNode(true)
+   );
    //MENU_ITEMS[i].addEventListener("click", changeIndex.bind(null, i));
 }
 

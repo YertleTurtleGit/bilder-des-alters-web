@@ -1,40 +1,66 @@
 "use strict";
 
 const CUBES = document.getElementsByClassName("cube");
-const CUBE_RIGHT = document.getElementById("cube__face--right");
-const CUBE_LEFT = document.getElementById("cube__face--left");
 
-const MENU_ITEMS: HTMLCollection = document.getElementsByClassName("menu-item");
-const CONTENT_PARTS: HTMLCollection = document.getElementsByClassName(
-   "content-part"
-);
+console.log(CUBES);
 
-var currentMenuItemIndex: number = 0;
-
-var introRotated: boolean = false;
-function wheeling(event): void {
-   if (!introRotated) {
-      setTimeout(function () {
-         introRotated = true;
-      }, 1000);
-      for (var i = 0; i < CUBES.length; i++) {
-         let drawingBuffer = CUBES[i] as HTMLElement;
-         drawingBuffer.style.transform = "rotateX(0deg)";
-         drawingBuffer.style.transform = "translateZ(-100px)";
-      }
+function getCurrentCubeSize(): number {
+   if (window.innerWidth > window.innerHeight) {
+      return window.innerHeight;
    } else {
+      return window.innerWidth;
    }
 }
 
-window.addEventListener("wheel", wheeling);
-for (var i = 0; i < CONTENT_PARTS.length; i++) {
-   CUBE_RIGHT.appendChild(
-      document.getElementById("content-part-" + String(i)).cloneNode(true)
-   );
-   //MENU_ITEMS[i].addEventListener("click", changeIndex.bind(null, i));
+function resized(): void {
+   for (var i = 1; i < CUBES.length; i++) {
+      let previousDrawingBuffer: HTMLElement = CUBES[i - 1] as HTMLElement;
+      const previousCube: HTMLElement = previousDrawingBuffer;
+
+      let drawingBuffer: HTMLElement = CUBES[i] as HTMLElement;
+      const cube: HTMLElement = drawingBuffer;
+
+      const faces: HTMLCollection = previousCube.children;
+
+      for (var j = 0; j < faces.length; j++) {
+         if (faces[j].classList.contains("cube__face--back")) {
+            let readBuffer: HTMLElement = faces[j] as HTMLElement;
+
+            console.log(getCurrentCubeSize());
+
+            if (readBuffer.clientHeight * 0.3 > getCurrentCubeSize()) {
+               cube.style.marginTop =
+                  String(readBuffer.clientHeight * 0.3) + "px";
+               console.log(readBuffer.clientHeight * 0.3);
+            } else {
+               cube.style.marginTop = "0px";
+            }
+         }
+      }
+   }
 }
 
-let drawingBuffer = MENU_ITEMS[currentMenuItemIndex] as HTMLElement;
-drawingBuffer.style.backgroundColor = "white";
+function rotateToCube(cubeId: number): void {
+   for (var i = 0; i < CUBES.length; i++) {
+      let drawingBuffer: HTMLElement = CUBES[i] as HTMLElement;
+      if (cubeId !== i) {
+         drawingBuffer.style.transform = "translateZ(-100px) rotateY(-90deg)";
+      } else {
+         drawingBuffer.style.transform = "translateZ(-100px)";
+      }
+   }
+}
+
+var currentId: number = 0;
+window.addEventListener("scroll", (event) => {
+   const id: number = Math.round(this.scrollY / getCurrentCubeSize());
+   if (id !== currentId) {
+      currentId = id;
+      rotateToCube(id);
+   }
+});
+
+rotateToCube(0);
+//window.addEventListener("resize", resized);
 
 console.log("script loaded.");

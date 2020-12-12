@@ -15,7 +15,7 @@
 * {
    box-sizing: border-box;
    font-family: Arial, Helvetica, sans-serif;
-   transition: all 1s;
+   transition: all 1.5s;
 }
 
 body {
@@ -27,6 +27,7 @@ body {
    min-height: 100%;
    padding: 0;
    margin: 0;
+   overflow-x: hidden;
 }
 
 .scene-float {
@@ -41,9 +42,8 @@ body {
 .cube {
    position: relative;
    width: var(--cube-size);
-   height: max-content;
    transform-style: preserve-3d;
-   transform: rotateX(90deg) translateZ(-100px);
+   transform: translateZ(-100px);
    z-index: 0;
 }
 
@@ -73,7 +73,6 @@ body {
    transform: rotateY(180deg);
    padding: 5%;
    text-align: justify;
-   background-color: white;
 }
 .cube__face--right > * {
    text-align: left;

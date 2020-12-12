@@ -1,30 +1,56 @@
 "use strict";
 const CUBES = document.getElementsByClassName("cube");
-const CUBE_RIGHT = document.getElementById("cube__face--right");
-const CUBE_LEFT = document.getElementById("cube__face--left");
-const MENU_ITEMS = document.getElementsByClassName("menu-item");
-const CONTENT_PARTS = document.getElementsByClassName("content-part");
-var currentMenuItemIndex = 0;
-var introRotated = false;
-function wheeling(event) {
-    if (!introRotated) {
-        setTimeout(function () {
-            introRotated = true;
-        }, 1000);
-        for (var i = 0; i < CUBES.length; i++) {
-            let drawingBuffer = CUBES[i];
-            drawingBuffer.style.transform = "rotateX(0deg)";
+console.log(CUBES);
+function getCurrentCubeSize() {
+    if (window.innerWidth > window.innerHeight) {
+        return window.innerHeight;
+    }
+    else {
+        return window.innerWidth;
+    }
+}
+function resized() {
+    for (var i = 1; i < CUBES.length; i++) {
+        let previousDrawingBuffer = CUBES[i - 1];
+        const previousCube = previousDrawingBuffer;
+        let drawingBuffer = CUBES[i];
+        const cube = drawingBuffer;
+        const faces = previousCube.children;
+        for (var j = 0; j < faces.length; j++) {
+            if (faces[j].classList.contains("cube__face--back")) {
+                let readBuffer = faces[j];
+                console.log(getCurrentCubeSize());
+                if (readBuffer.clientHeight * 0.3 > getCurrentCubeSize()) {
+                    cube.style.marginTop =
+                        String(readBuffer.clientHeight * 0.3) + "px";
+                    console.log(readBuffer.clientHeight * 0.3);
+                }
+                else {
+                    cube.style.marginTop = "0px";
+                }
+            }
+        }
+    }
+}
+function rotateToCube(cubeId) {
+    for (var i = 0; i < CUBES.length; i++) {
+        let drawingBuffer = CUBES[i];
+        if (cubeId !== i) {
+            drawingBuffer.style.transform = "translateZ(-100px) rotateY(-90deg)";
+        }
+        else {
             drawingBuffer.style.transform = "translateZ(-100px)";
         }
     }
-    else {
+}
+var currentId = 0;
+window.addEventListener("scroll", (event) => {
+    const id = Math.round(this.scrollY / getCurrentCubeSize());
+    if (id !== currentId) {
+        currentId = id;
+        rotateToCube(id);
     }
-}
-window.addEventListener("wheel", wheeling);
-for (var i = 0; i < CONTENT_PARTS.length; i++) {
-    CUBE_RIGHT.appendChild(document.getElementById("content-part-" + String(i)).cloneNode(true));
-    //MENU_ITEMS[i].addEventListener("click", changeIndex.bind(null, i));
-}
-let drawingBuffer = MENU_ITEMS[currentMenuItemIndex];
-drawingBuffer.style.backgroundColor = "white";
+});
+rotateToCube(0);
+//window.addEventListener("resize", resized);
 console.log("script loaded.");

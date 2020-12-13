@@ -1,6 +1,7 @@
 @media (orientation: portrait) {
    :root {
       --cube-size: 100vw;
+      --neg-cube-size: -200vw;
       --cube-size-half: 50vw;
    }
 }
@@ -8,6 +9,7 @@
 @media (orientation: landscape) {
    :root {
       --cube-size: 100vh;
+      --neg-cube-size: -200vh;
       --cube-size-half: 50vh;
    }
 }
@@ -31,9 +33,14 @@ body {
 }
 
 .scene-float {
+   perspective: 600px;
+   width: 100%;
+   height: auto;
+   min-height: var(--cube-size);
 }
 
 .scene {
+   position: absolute;
    width: var(--cube-size);
    height: var(--cube-size);
    perspective: 600px;
@@ -42,6 +49,7 @@ body {
 .cube {
    position: relative;
    width: var(--cube-size);
+   height: auto;
    transform-style: preserve-3d;
    transform: translateZ(-100px);
    z-index: 0;
@@ -56,7 +64,6 @@ body {
    text-align: center;
    padding: 0%;
    margin: 0%;
-   transform-origin: top top 0px;
 }
 
 .cube__face--right {
@@ -65,14 +72,19 @@ body {
    transform: rotateY(90deg) translateZ(var(--cube-size-half));
 }
 .cube__face--back {
+   width: var(--cube-size);
    height: auto;
    min-height: var(--cube-size);
    transform: rotateY(180deg) translateZ(var(--cube-size-half));
 }
 .cube__face--back > * {
-   text-align: left;
+   font-size: 1.85rem;
+   color: black;
    transform: rotateY(180deg);
-   padding: 5%;
+   padding: 0%;
+   padding-left: 5%;
+   padding-right: 5%;
+   text-align: left;
    text-align: justify;
 }
 .cube__face--right > * {
@@ -105,7 +117,6 @@ body {
    transform: rotateX(90deg) translateZ(var(--cube-size-half));
 }
 .cube__face--top > * {
-   position: sticky;
    width: 100%;
    height: auto;
    top: 20%;

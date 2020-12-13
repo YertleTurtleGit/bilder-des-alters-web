@@ -81,6 +81,7 @@ body {
    font-size: 1.85rem;
    color: black;
    transform: rotateY(180deg);
+   margin: 0%;
    padding: 0%;
    padding-left: 5%;
    padding-right: 5%;

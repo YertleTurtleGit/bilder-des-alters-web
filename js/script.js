@@ -1,6 +1,5 @@
 "use strict";
 const CUBES = document.getElementsByClassName("cube");
-console.log(CUBES);
 function getCurrentCubeSize() {
     if (window.innerWidth > window.innerHeight) {
         return window.innerHeight;
@@ -19,11 +18,9 @@ function resized() {
         for (var j = 0; j < faces.length; j++) {
             if (faces[j].classList.contains("cube__face--back")) {
                 let readBuffer = faces[j];
-                console.log(getCurrentCubeSize());
                 if (readBuffer.clientHeight * 0.3 > getCurrentCubeSize()) {
                     cube.style.marginTop =
                         String(readBuffer.clientHeight * 0.3) + "px";
-                    console.log(readBuffer.clientHeight * 0.3);
                 }
                 else {
                     cube.style.marginTop = "0px";
@@ -32,14 +29,44 @@ function resized() {
         }
     }
 }
-function rotateToCube(cubeId) {
+function setActiveCube(cubeId) {
+    let drawingBuffer = CUBES[cubeId];
+    const faces = CUBES[cubeId].children;
+    drawingBuffer.style.transform = "translateZ(-100px)";
+    drawingBuffer.style.zIndex = "2";
+    for (var j = 0; j < faces.length; j++) {
+        const faceContents = faces[j].querySelectorAll("p,li");
+        for (var k = 0; k < faceContents.length; k++) {
+            let faceContentBuffer = faceContents[k];
+            faceContentBuffer.style.backgroundColor = "lime";
+            faceContentBuffer.style.zIndex = "2";
+        }
+    }
     for (var i = 0; i < CUBES.length; i++) {
         let drawingBuffer = CUBES[i];
+        const faces = CUBES[i].children;
         if (cubeId !== i) {
             drawingBuffer.style.transform = "translateZ(-100px) rotateY(-90deg)";
+            drawingBuffer.style.zIndex = "1";
+            for (var j = 0; j < faces.length; j++) {
+                const faceContents = faces[j].querySelectorAll("p,li");
+                for (var k = 0; k < faceContents.length; k++) {
+                    let faceContentBuffer = faceContents[k];
+                    faceContentBuffer.style.backgroundColor = "transparent";
+                    faceContentBuffer.style.zIndex = "1";
+                }
+            }
         }
-        else {
-            drawingBuffer.style.transform = "translateZ(-100px)";
+    }
+}
+function adjustSize() {
+    for (var i = 0; i < CUBES.length; i++) {
+        var backFace = CUBES[i].getElementsByClassName("cube__face--back")[0];
+        if (backFace.scrollHeight > getCurrentCubeSize()) {
+            console.log(backFace.scrollHeight);
+            let drawingBuffer = CUBES[i];
+            drawingBuffer.style.marginBottom =
+                String(backFace.scrollHeight) + "px";
         }
     }
 }
@@ -48,9 +75,10 @@ window.addEventListener("scroll", (event) => {
     const id = Math.round(this.scrollY / getCurrentCubeSize());
     if (id !== currentId) {
         currentId = id;
-        rotateToCube(id);
+        setActiveCube(id);
     }
 });
-rotateToCube(0);
-//window.addEventListener("resize", resized);
+window.addEventListener("resize", adjustSize);
+setActiveCube(0);
+adjustSize();
 console.log("script loaded.");

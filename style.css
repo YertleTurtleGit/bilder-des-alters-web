@@ -51,11 +51,12 @@ body {
    position: absolute;
    width: var(--cube-size);
    height: var(--cube-size);
-   font-size: 1.75rem;
+   font-size: 1.85rem;
    color: black;
    text-align: center;
    padding: 0%;
    margin: 0%;
+   transform-origin: top top 0px;
 }
 
 .cube__face--right {

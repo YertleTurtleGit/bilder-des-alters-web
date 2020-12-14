@@ -1,300 +1,71 @@
-@media (orientation: portrait) {
-   :root {
-      --cube-size: 100vw;
-      --neg-cube-size: -200vw;
-      --cube-size-half: 50vw;
-   }
-}
-
-@media (orientation: landscape) {
-   :root {
-      --cube-size: 100vh;
-      --neg-cube-size: -200vh;
-      --cube-size-half: 50vh;
-   }
-}
-
-* {
-   box-sizing: border-box;
-   font-family: Arial, Helvetica, sans-serif;
-   transition: all 1.5s;
+:root {
+   --content-column-width: 400px;
 }
 
 body {
    position: absolute;
-   top: 0%;
-   left: 0%;
+   top: 0;
+   left: 0;
    width: 100%;
    height: auto;
-   min-height: 100%;
-   padding: 0;
    margin: 0;
+   border: 0;
+   padding: 0;
    overflow-x: hidden;
+   transition: all 1.5s;
 }
 
-.scene-float {
-   perspective: 600px;
-   width: 100%;
-   height: auto;
-   min-height: var(--cube-size);
+#content-1 > * {
+   transform-origin: center center 50%;
+   transform: rotateY(-45deg);
 }
 
-.scene {
-   position: absolute;
-   width: var(--cube-size);
-   height: var(--cube-size);
-   perspective: 600px;
-}
-
-.cube {
+.content {
    position: relative;
-   width: var(--cube-size);
-   height: auto;
-   transform-style: preserve-3d;
-   transform: translateZ(-100px);
-   z-index: 0;
-}
-
-.cube__face {
-   position: absolute;
-   width: var(--cube-size);
-   height: var(--cube-size);
-   font-size: 1.85rem;
-   color: black;
-   text-align: center;
-   padding: 0%;
-   margin: 0%;
-}
-
-.cube__face--right {
-   height: auto;
-   min-height: var(--cube-size);
-   transform: rotateY(90deg) translateZ(var(--cube-size-half));
-}
-.cube__face--back {
-   width: var(--cube-size);
-   height: auto;
-   min-height: var(--cube-size);
-   transform: rotateY(180deg) translateZ(var(--cube-size-half));
-}
-.cube__face--back > * {
-   font-size: 1.85rem;
-   color: black;
-   transform: rotateY(180deg);
-   margin: 0%;
-   padding: 0%;
-   padding-left: 5%;
-   padding-right: 5%;
-   text-align: left;
-   text-align: justify;
-}
-.cube__face--right > * {
-   text-align: left;
-   transform: rotateY(180deg);
-   padding: 5%;
-   text-align: justify;
-}
-
-.cube__face--left {
-   transform: rotateY(-90deg) translateZ(var(--cube-size-half));
-}
-.cube__face--left > * {
-   transform: rotateY(180deg);
-   padding: 5%;
-   padding-right: 10%;
-   font-size: 3rem;
-   text-transform: uppercase;
-}
-.cube__face--left ul {
-   list-style: none;
-   text-align: right;
-   cursor: pointer;
-}
-.cube__face--left ul li:hover {
-   background-color: lightgray;
-}
-
-.cube__face--top {
-   transform: rotateX(90deg) translateZ(var(--cube-size-half));
-}
-.cube__face--top > * {
    width: 100%;
    height: auto;
-   top: 20%;
-   left: 0%;
-   padding: 5%;
-   list-style: none;
-   text-transform: uppercase;
-   transform: rotateX(180deg);
-   font-size: 5.5rem;
+   min-height: 50%;
+   margin-bottom: 25%;
+
+   display: grid;
+   grid-template-columns: 250px var(--content-column-width) 300px;
+   grid-template-rows: auto auto;
+   grid-template-areas:
+      ".                content-top      ."
+      "content-left     content-back     content-right";
+
+   perspective: 400px;
+   transform-style: preserve-3d;
 }
 
-.cube__face--top ul li {
+.content-top {
+   grid-area: content-top;
+}
+
+.content-top h1 {
+   text-transform: uppercase;
    text-align: justify;
    text-align-last: justify;
 }
 
-.cube__face--bottom {
-   transform: rotateX(-90deg) translateZ(var(--cube-size-half));
+.content-left {
+   grid-area: content-left;
+   transform-origin: right center 0;
+   transform: rotateY(45deg);
 }
 
-.cube__face--bottom > * {
-   width: 100%;
-   height: auto;
-   transform: rotateX(180deg);
-   padding: 5%;
-   padding-top: 15%;
-   font-size: 1.75rem;
+.content-left ul {
+   text-align: right;
+   list-style: none;
 }
 
-.cube__face--bottom img {
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   max-width: 50%;
-   max-height: 50%;
+.content-back {
+   grid-area: content-back;
+   text-align: justify;
 }
 
-.cube__face--bottom p {
-   position: absolute;
-   top: 50%;
-   left: 0%;
-   max-width: 50%;
-   max-height: 50%;
-}
-
-@media (orientation: landscape) {
-   @media (max-height: 910px) {
-      .cube__face--top > * {
-         font-size: 4.5rem;
-      }
-   }
-
-   @media (max-height: 750px) {
-      .scene {
-         perspective: 400px;
-      }
-      .cube__face--top > * {
-         font-size: 4rem;
-      }
-   }
-
-   @media (max-height: 700px) {
-      .cube__face--top > * {
-         font-size: 3.5rem;
-      }
-      .cube__face--bottom > * {
-         font-size: 1.5rem;
-      }
-   }
-
-   @media (max-height: 600px) {
-      .cube__face--top > * {
-         font-size: 3rem;
-      }
-      .cube__face--bottom > * {
-         font-size: 1.4rem;
-      }
-   }
-
-   @media (max-height: 540px) {
-      .cube__face--left > * {
-         font-size: 2.75rem;
-      }
-      .cube__face--bottom > * {
-         font-size: 1.3rem;
-      }
-   }
-
-   @media (max-height: 500px) {
-      .cube__face--top > * {
-         font-size: 2.7rem;
-      }
-      .cube__face--left > * {
-         font-size: 2.5rem;
-      }
-      .cube__face--bottom > * {
-         font-size: 1.2rem;
-      }
-   }
-
-   @media (max-height: 450px) {
-      .cube__face--top > * {
-         font-size: 2.4rem;
-      }
-      .cube__face--left > * {
-         font-size: 2rem;
-      }
-      .cube__face--bottom > * {
-         font-size: 1rem;
-      }
-   }
-}
-
-@media (orientation: portrait) {
-   @media (max-width: 1000px) {
-      .scene {
-         perspective: 400px;
-      }
-      .cube__face--top > * {
-         font-size: 4.5rem;
-      }
-      .cube__face--left > * {
-         font-size: 2.5rem;
-      }
-      .cube__face--bottom > * {
-         font-size: 1.6rem;
-      }
-   }
-
-   @media (max-width: 750px) {
-      .cube__face--top > * {
-         font-size: 3.5rem;
-      }
-      .cube__face--left > * {
-         font-size: 2.1rem;
-      }
-      .cube__face--bottom > * {
-         font-size: 1.3rem;
-      }
-   }
-
-   @media (max-width: 600px) {
-      .scene {
-         perspective: 300px;
-      }
-      .cube__face--top > * {
-         font-size: 2.4rem;
-      }
-      .cube__face--left > * {
-         font-size: 1.7rem;
-      }
-      .cube__face--bottom > * {
-         font-size: 1.1rem;
-      }
-   }
-
-   @media (max-width: 400px) {
-      .scene {
-         perspective: 300px;
-      }
-      .cube__face {
-         font-size: 0.75rem;
-      }
-      .cube__face--top > * {
-         font-size: 2.1rem;
-      }
-      .cube__face--left > * {
-         font-size: 1.6rem;
-      }
-      .cube__face--back > * {
-         font-size: 1.5rem;
-      }
-      .cube__face--right > * {
-         font-size: 1.5rem;
-      }
-      .cube__face--bottom > * {
-         font-size: 1rem;
-      }
-   }
+.content-right {
+   grid-area: content-right;
+   transform-origin: left center 0;
+   transform: rotateY(-45deg);
 }

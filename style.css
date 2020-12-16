@@ -13,11 +13,16 @@ body {
    padding: 0;
    overflow-x: hidden;
    transition: all 1.5s;
+   font-family: Arial, Helvetica, sans-serif;
+   font-size: 12pt;
 }
 
-#content-1 > * {
-   transform-origin: center center 50%;
-   transform: rotateY(-45deg);
+#rotate {
+   transform-origin: center center;
+}
+
+.content > * {
+   display: inline-block;
 }
 
 .content {
@@ -35,6 +40,7 @@ body {
       "content-left     content-back     content-right";
 
    perspective: 400px;
+   perspective-origin: center;
    transform-style: preserve-3d;
 }
 
@@ -50,8 +56,9 @@ body {
 
 .content-left {
    grid-area: content-left;
-   transform-origin: right center 0;
-   transform: rotateY(45deg);
+   transform-origin: right center;
+   transform: rotateY(45deg) scale(0.5);
+   font-size: 24pt;
 }
 
 .content-left ul {
@@ -66,6 +73,6 @@ body {
 
 .content-right {
    grid-area: content-right;
-   transform-origin: left center 0;
+   transform-origin: left center;
    transform: rotateY(-45deg);
 }

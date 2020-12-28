@@ -17,12 +17,8 @@ body {
    font-size: 12pt;
 }
 
-#rotate {
-   transform-origin: center center;
-}
-
-.content > * {
-   display: inline-block;
+.content-passive {
+   transform: rotateY(-75deg);
 }
 
 .content {
@@ -41,11 +37,16 @@ body {
 
    perspective: 400px;
    perspective-origin: center;
+   transform-origin: center;
    transform-style: preserve-3d;
+
+   transition: all 1s;
 }
 
 .content-top {
    grid-area: content-top;
+   transform-origin: bottom;
+   transform: rotateX(-30deg);
 }
 
 .content-top h1 {

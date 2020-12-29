@@ -5,7 +5,7 @@
 body {
    position: absolute;
    top: 0;
-   left: 0;
+   left: 0%;
    width: 100%;
    height: auto;
    margin: 0;
@@ -17,8 +17,43 @@ body {
    font-size: 12pt;
 }
 
+.three-dimensional-scene {
+   position: relative;
+   width: 100%;
+   max-width: calc(250px + 400px + 300px);
+   perspective-origin: center;
+   perspective: 400px;
+}
+
 .content-passive {
-   transform: rotateY(-75deg);
+   transform: translateZ(50px) translateX(200px) rotateY(-90deg);
+}
+
+.content-passive > * {
+   z-index: 1 !important;
+}
+
+.content > * {
+   z-index: 2;
+}
+
+.content-passive p,
+.content-passive h1,
+.content-passive h2,
+.content-passive li {
+   background-color: transparent !important;
+}
+
+.content > * {
+   backface-visibility: hidden;
+   border: 2px solid grey;
+}
+
+.content p,
+.content h1,
+.content h2,
+.content li {
+   background-color: white;
 }
 
 .content {
@@ -26,7 +61,7 @@ body {
    width: 100%;
    height: auto;
    min-height: 50%;
-   margin-bottom: 25%;
+   margin-bottom: 10%;
 
    display: grid;
    grid-template-columns: 250px var(--content-column-width) 300px;
@@ -35,8 +70,6 @@ body {
       ".                content-top      ."
       "content-left     content-back     content-right";
 
-   perspective: 400px;
-   perspective-origin: center;
    transform-origin: center;
    transform-style: preserve-3d;
 
@@ -46,20 +79,22 @@ body {
 .content-top {
    grid-area: content-top;
    transform-origin: bottom;
-   transform: rotateX(-30deg);
+   transform: rotateX(-90deg);
 }
 
 .content-top h1 {
    text-transform: uppercase;
    text-align: justify;
    text-align-last: justify;
+   font-size: 30pt;
 }
 
 .content-left {
    grid-area: content-left;
    transform-origin: right center;
-   transform: rotateY(45deg) scale(0.5);
-   font-size: 24pt;
+   transform: rotateY(90deg);
+   font-size: 20pt;
+   padding-right: 7px;
 }
 
 .content-left ul {
@@ -70,10 +105,17 @@ body {
 .content-back {
    grid-area: content-back;
    text-align: justify;
+   padding-left: 7px;
+   padding-right: 7px;
 }
 
 .content-right {
    grid-area: content-right;
    transform-origin: left center;
-   transform: rotateY(-45deg);
+   transform: rotateY(-90deg);
+}
+
+.content-right img {
+   max-width: 100%;
+   max-height: 100%;
 }

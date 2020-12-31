@@ -46,7 +46,6 @@ body {
 
 .content > * {
    backface-visibility: hidden;
-   border: 2px solid grey;
 }
 
 .content p,
@@ -73,20 +72,23 @@ body {
    transform-origin: center;
    transform-style: preserve-3d;
 
-   transition: all 1s;
+   transition: all 1.2s;
 }
 
 .content-top {
    grid-area: content-top;
    transform-origin: bottom;
    transform: rotateX(-90deg);
+   padding: 20px;
+   padding-bottom: 75px;
 }
 
 .content-top h1 {
    text-transform: uppercase;
    text-align: justify;
    text-align-last: justify;
-   font-size: 30pt;
+   font-size: 25pt;
+   font-weight: normal;
 }
 
 .content-left {
@@ -94,7 +96,7 @@ body {
    transform-origin: right center;
    transform: rotateY(90deg);
    font-size: 20pt;
-   padding-right: 7px;
+   padding-right: 25px;
 }
 
 .content-left ul {
@@ -105,8 +107,8 @@ body {
 .content-back {
    grid-area: content-back;
    text-align: justify;
-   padding-left: 7px;
-   padding-right: 7px;
+   padding-left: 25px;
+   padding-right: 25px;
 }
 
 .content-right {

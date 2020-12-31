@@ -26,7 +26,17 @@ body {
 }
 
 .content-passive {
-   transform: translateZ(50px) translateX(200px) rotateY(-90deg);
+   transform: translateZ(50px) translateX(200px) rotateY(-80deg);
+}
+
+.content-passive img {
+   opacity: 0 !important;
+   transition: all 1.5s;
+}
+
+.content img {
+   opacity: 1;
+   transition: all 1.5s;
 }
 
 .content-passive > * {
